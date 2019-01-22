@@ -10,11 +10,11 @@ Unit test cases: /tests/
 
 
 ### Installation
-This is a dockerized application. Do the following
+This is a dockerized application. Do the following in Ubuntu (18.04 LTS) machine
 
 To do:
 
-- `cd project_directory/` into the project root directory.
+- Checkout and `cd project_directory/` to go to the project root directory.
 - add `GOOGLE_MAP_API_KEY` to .env file
 - `sh ./start.sh`
 
