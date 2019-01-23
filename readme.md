@@ -29,6 +29,7 @@ To do:
  - [x] Place Order API
  - [x] Update Order API
  - [x] List Order API
+ - [x] Test Case
  - [x] Instruction doc
  - [x] Install script
  

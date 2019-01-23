@@ -26,17 +26,19 @@ class OrderController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
      * @param Request $request
      * @return mixed
-     * @throws \App\Exceptions\TransformerException
      * @throws \Exception
      */
     public function index(Request $request)
     {
-        return Response::json(
-            $this->orderTransformer->transformCollection($this->orderService->fetchOrders($request->all()))['data']
-        );
+        try {
+            return Response::json(
+                $this->orderTransformer->transformCollection($this->orderService->fetchOrders($request->all()))['data']
+            );
+        } catch (\Exception $exception) {
+            throw new \Exception($exception->getMessage());
+        }
     }
 
     /**
@@ -48,7 +50,11 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        return Response::json($this->orderTransformer->transform($this->orderService->storeOrder($request->all())));
+        try {
+            return Response::json($this->orderTransformer->transform($this->orderService->storeOrder($request->all())));
+        } catch (\Exception $exception) {
+            throw new \Exception($exception->getMessage());
+        }
     }
 
     /**
