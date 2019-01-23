@@ -2,15 +2,18 @@
 
 namespace Tests\Feature;
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 abstract class CrudTest extends TestCase
 {
-    use DatabaseTransactions;
 
     protected $endPoint;
     protected $apiBasePath = "api";
+
+    public function setUp()
+    {
+        parent::setUp();
+    }
 
     /**
      * @depends testIDProvider
@@ -27,7 +30,7 @@ abstract class CrudTest extends TestCase
     }
 
     /**
-     * @param $params
+     * @dataProvider paramProvider
      */
     public function testCreate($params)
     {
@@ -41,13 +44,14 @@ abstract class CrudTest extends TestCase
     }
 
     /**
-     * @param $params
-     * @param $id
+     * @dataProvider paramProvider
+     * @depends testIDProvider
      */
     public function testUpdate($params, $id)
     {
+        $order = factory(\App\Models\Order::class)->create();
         $response = $this->call("PATCH",
-            sprintf("%s/%s/%d", $this->apiBasePath, $this->endPoint, $id),
+            sprintf("%s/%s/%d", $this->apiBasePath, $this->endPoint, $order->id),
             ['status' => ORDER_TAKEN]
         )->getOriginalContent();
         $this->assertResponseOk();

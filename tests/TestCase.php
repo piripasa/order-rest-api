@@ -9,6 +9,7 @@ define('LUMEN_START', microtime(true));
 
 abstract class TestCase extends TCase
 {
+    use DatabaseMigrations, DatabaseTransactions;
     /**
      * Creates the application.
      *
@@ -16,7 +17,7 @@ abstract class TestCase extends TCase
      */
     public function createApplication()
     {
-        //putenv('DB_CONNECTION=testing');
+        putenv('DB_CONNECTION=testing');
         return require __DIR__.'/../bootstrap/app.php';
     }
 }

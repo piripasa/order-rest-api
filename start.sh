@@ -14,6 +14,8 @@ do
 done
 echo "Installing dependencies"
 sudo docker-compose exec php composer install
+sudo docker-compose exec php chgrp -R www-data storage
+sudo docker-compose exec php chmod -R ug+rwx storage
 echo "Migrating database"
 rm -f bootstrap/cache/*.php
 sudo docker-compose exec php php artisan migrate --env=testing && echo "Database migrated"
