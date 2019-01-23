@@ -5,6 +5,7 @@
 - Lumen 5.5 (PHP framework)
 - MySQL (for storage engine)
 - Composer (for installing dependencies)
+- Google map distance matrix API is used for getting distance between 2 coordinates.
 
 Unit test cases: /tests/
 
